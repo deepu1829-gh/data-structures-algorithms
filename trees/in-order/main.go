@@ -9,20 +9,15 @@ type Node struct {
 	right *Node
 }
 
-func inorder(root *Node) []int {
-	result := []int{}
-	fillInorder(root, &result)
-	return result
-}
-
 // Helper recursive function
-func fillInorder(root *Node, result *[]int) {
+func inorder(root *Node, result *[]int) {
 	if root == nil {
 		return
 	}
-	fillInorder(root.left, result)        // left
+
+	inorder(root.left, result)            // left
 	*result = append(*result, root.value) // visit root
-	fillInorder(root.right, result)       // right
+	inorder(root.right, result)           // right
 }
 
 func newNode(value int) *Node {
@@ -46,6 +41,7 @@ func main() {
 	root.right.left = newNode(5)
 	root.right.right = newNode(7)
 
-	result := inorder(root)
+	result := []int{}
+	inorder(root, &result)
 	fmt.Println("In-order result:", result)
 }
