@@ -10,19 +10,12 @@ type Node struct {
 }
 
 // Helper recursive function
-func height(t *Node) int {
-	if t == nil {
+func preorder(root *Node) int {
+	if root == nil {
 		return 0
 	}
 
-	leftHeight := height(t.left)
-	rightHeight := height(t.right)
-
-	if leftHeight > rightHeight {
-		return 1 + leftHeight
-	} else {
-		return 1 + rightHeight
-	}
+	return 1 + preorder(root.left) + preorder(root.right)
 }
 
 func newNode(value int) *Node {
@@ -46,7 +39,6 @@ func main() {
 	root.right.left = newNode(5)
 	root.right.right = newNode(7)
 
-	result := height(root)
-
+	result := preorder(root)
 	fmt.Println("count of nodes:::", result)
 }
